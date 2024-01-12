@@ -27,7 +27,8 @@ def random_word(language="Any", difficulty="Any"):
         "word": df_filtered.loc[my_index, "word"],
         "language": df_filtered.loc[my_index, "language"],
         "difficulty": df_filtered.loc[my_index, "difficulty"],
-        "word_index": my_index
+        "word_index": my_index,
+        "word_lenght": len(df_filtered.loc[my_index, "word"])
     }
 
     return choosen_word
