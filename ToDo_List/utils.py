@@ -35,3 +35,14 @@ class Task:
         if not Task.tasks:
             return -1
         return  max(task.id for task in Task.tasks)
+    
+def show_menu():
+    os.system("cls")
+    print("-"*40)
+    print("Choose an option:\n")
+    print("1 - Create a task")
+    print("2 - Delete a task")
+    print("3 - List all tasks")
+    print("-"*40)
+
+show_menu()
