@@ -44,5 +44,3 @@ def show_menu():
     print("2 - Delete a task")
     print("3 - List all tasks")
     print("-"*40)
-
-show_menu()
