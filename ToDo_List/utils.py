@@ -1,18 +1,37 @@
+import os
+import time
+
 class Task:
-    def __init__(self, id, name, priority):
+    
+    def __init__(self, id, description, priority):
         
         self.id = id
-        self.name = name
+        self.description = description
         self.priority = priority
 
     tasks = []
 
     def include_task(self):
         Task.tasks.append(self)
+        print(f"Task included! (ID: {self.id} | Description: {self.description}) | Priority: {self.priority}")
+        time.sleep(3)
 
-    def delete_task(self):
-        print("Work in progress")
+    def delete_task(id):
+        for my_task in Task.tasks:
+            if my_task.id == id:
+                my_task_description = my_task.description
+                Task.tasks.remove(my_task)
+                print(f"Task deleted (ID: {id} | Description: {my_task_description})")
+            else:
+                print(f"Task ID {id} not found.")
+        time.sleep(3)
 
     @staticmethod
-    def all_tasks():
+    def list_all_tasks():
         return Task.tasks
+    
+    @staticmethod
+    def get_max_id():
+        if not Task.tasks:
+            return -1
+        return  max(task.id for task in Task.tasks)
