@@ -1,15 +1,12 @@
-
+import pandas as pd
 import requests
-
-# api_url = "http://apiadvisor.climatempo.com.br//api/v1/locale/city?name=CityName&state=StateAbbr&country=BR&token=your-app-token"
 
 api_main_url = "http://apiadvisor.climatempo.com.br/api/v1/locale/city?"
 my_token = "1766b03ce7ea5fbb097b15f4ef065905"
 my_country = ""
-my_name = ""
+my_name = "São P"
 my_state = ""
 my_province = ""
-
 
 # Retorna a url completa se main_url e token forem não nulos
 def get_full_url(main_url, token="", name="", state=""):
@@ -37,6 +34,14 @@ def check_api_get_data(response_sts_code):
         return True
     return False
 
+# Transforma os dados da API em um dataframe
+def from_api_get_to_dataframe(my_object):
+    return pd.DataFrame(my_object.json())
 
-print(api_get_data(get_full_url(api_main_url, my_token, "São Pa", "SP")))
-print(api_get_data(get_full_url(api_main_url, my_token, "São Pa", "SP")).status_code==200)
+api_response = api_get_data(get_full_url(api_main_url, my_token, my_name, my_state))
+
+if not check_api_get_data(api_response.status_code):
+     print("Erro ao carregar os dados da API")
+     exit
+
+print(from_api_get_to_dataframe(api_response).head(10))
